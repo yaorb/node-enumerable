@@ -4,11 +4,9 @@
         "openOutputOnDeploy": false,
         "openOutputOnStartup": false,
         "showPopupOnSuccess": false,
-
         "packages": [
             {
                 "name": "GitHub",
-
                 "files": [
                     "/demo/**",
                     "/js/enumerable.js",
@@ -17,13 +15,13 @@
                     "/LICENSE",
                     "/README.md"
                 ],
-
-                "targets": [ "GitHub Release" ]
+                "targets": [
+                    "GitHub Release"
+                ]
             },
             {
                 "name": "index.js",
                 "description": "The NodeJS compatible generated file from 'index.ts'.",
-
                 "deployOnChange": {
                     "files": [
                         "/index.js"
@@ -33,13 +31,12 @@
                 "files": [
                     "/index.js"
                 ],
-
-                "targets": [ "enumerable.js" ],
-
+                "targets": [
+                    "enumerable.js"
+                ],
                 "sortOrder": 1
             }
         ],
-        
         "targets": [
             {
                 "name": "GitHub Release",

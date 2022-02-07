@@ -33,11 +33,11 @@ const Path = require('path');
 
 const LINE_SPLITTER = "\n";
 
-exports.deployFile = function(args) {
+exports.deployFile = function (args) {
     // lines of NodeJS '/index.js' file
     let index_js = FS.readFileSync(args.file)
-                     .toString('utf8')
-                     .split(LINE_SPLITTER);
+        .toString('utf8')
+        .split(LINE_SPLITTER);
 
     // make browser compatible
     var enumerable_js = [];
@@ -62,8 +62,8 @@ exports.deployFile = function(args) {
     );
 
     var listOfOutputFiles = [
-        Path.join( __dirname, '../js/enumerable.js' ),
-        Path.join( __dirname, '../demo/js/enumerable.js' ),
+        Path.join(__dirname, '../js/enumerable.js'),
+        Path.join(__dirname, '../demo/js/enumerable.js'),
     ];
 
     for (let outFile of listOfOutputFiles) {
@@ -72,4 +72,4 @@ exports.deployFile = function(args) {
             content,
         );
     }
-}
+};

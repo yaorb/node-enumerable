@@ -3,21 +3,20 @@
  *
  * Copyright (c) Marcel Joachim Kloubert <marcel.kloubert@gmx.net>
  */
-declare namespace Enumerable {
-  /**
-   * An async action.
-   *
-   * @template T Type of the underlying items.
-   *
-   * @param {AsyncActionContext<T>} context The underlying context.
-   */
-  type AsyncAction<T = any> = (context: AsyncActionContext<T>) => void;
-  /**
-   * A context for an async action.
-   *
-   * @template T Type of the underlying item.
-   */
-  interface AsyncActionContext<T = any> {
+/**
+ * An async action.
+ *
+ * @template T Type of the underlying items.
+ *
+ * @param {AsyncActionContext<T>} context The underlying context.
+ */
+export declare type AsyncAction<T = any> = (context: AsyncActionContext<T>) => void;
+/**
+ * A context for an async action.
+ *
+ * @template T Type of the underlying item.
+ */
+export interface AsyncActionContext<T = any> {
     /**
      * Cancels the whole operation.
      *
@@ -66,65 +65,62 @@ declare namespace Enumerable {
      * Gets or sets the value for this action and the upcoming ones.
      */
     value: any;
-  }
-  /**
-   * A factory function that can be cancelled.
-   *
-   * @template TResult The type of the result.
-   *
-   * @param {((cancel: (flag?: boolean) => void)} cancel The callback to cancel the operation.
-   * @param {number} index The zero based index of that invocation.
-   *
-   * @return {TResult} The result.
-   */
-  type CancelableFactory<TResult = any> = (
-    cancel: (flag?: boolean) => void,
-    index: number,
-  ) => TResult;
-  /**
-   * Compares to values.
-   *
-   * @template T Type of the "left" value.
-   * @template U Type of the "right" value.
-   *
-   * @param {T} x The "left" value.
-   * @param {U} y The "right" value.
-   *
-   * @return {number} The "sort" value.
-   */
-  type Comparer<T = any, U = T> = (x: T, y: U) => number;
-  /**
-   * A forEach action.
-   *
-   * @template T Type of the items.
-   *
-   * @param {T} item The current item.
-   * @param {number} index The zero based index of the current item.
-   */
-  type EachAction<T = any> = (item: T, index: number) => void;
-  /**
-   * Checks if two values are equal.
-   *
-   * @template T Type of the "left" value.
-   * @template U Type of the "right" value.
-   *
-   * @param {T} x The "left" value.
-   * @param {U} y The "right" value.
-   *
-   * @return {boolean} Are equal or not.
-   */
-  type EqualityComparer<T = any, U = T> = (x: T, y: U) => boolean;
-  /**
-   * An item message (provider).
-   */
-  type ItemMessage<T = any> = string | ((item: T, index?: number) => any);
-  /**
-   * Saves joined values.
-   *
-   * @template TOuter Type of the outer value.
-   * @template TInner Type of the inner value.
-   */
-  interface JoinedItems<TOuter = any, TInner = any> {
+}
+/**
+ * A factory function that can be cancelled.
+ *
+ * @template TResult The type of the result.
+ *
+ * @param {((cancel: (flag?: boolean) => void)} cancel The callback to cancel the operation.
+ * @param {number} index The zero based index of that invocation.
+ *
+ * @return {TResult} The result.
+ */
+export declare type CancelableFactory<TResult = any> = (cancel: (flag?: boolean) => void, index: number) => TResult;
+/**
+ * Compares to values.
+ *
+ * @template T Type of the "left" value.
+ * @template U Type of the "right" value.
+ *
+ * @param {T} x The "left" value.
+ * @param {U} y The "right" value.
+ *
+ * @return {number} The "sort" value.
+ */
+export declare type Comparer<T = any, U = T> = (x: T, y: U) => number;
+/**
+ * A forEach action.
+ *
+ * @template T Type of the items.
+ *
+ * @param {T} item The current item.
+ * @param {number} index The zero based index of the current item.
+ */
+export declare type EachAction<T = any> = (item: T, index: number) => void;
+/**
+ * Checks if two values are equal.
+ *
+ * @template T Type of the "left" value.
+ * @template U Type of the "right" value.
+ *
+ * @param {T} x The "left" value.
+ * @param {U} y The "right" value.
+ *
+ * @return {boolean} Are equal or not.
+ */
+export declare type EqualityComparer<T = any, U = T> = (x: T, y: U) => boolean;
+/**
+ * An item message (provider).
+ */
+export declare type ItemMessage<T = any> = string | ((item: T, index?: number) => any);
+/**
+ * Saves joined values.
+ *
+ * @template TOuter Type of the outer value.
+ * @template TInner Type of the inner value.
+ */
+export interface JoinedItems<TOuter = any, TInner = any> {
     /**
      * The inner value.
      */
@@ -133,11 +129,11 @@ declare namespace Enumerable {
      * The outer value.
      */
     outer: TOuter;
-  }
-  /**
-   * A collection that can be popped.
-   */
-  interface PoppableStack<T = any> {
+}
+/**
+ * A collection that can be popped.
+ */
+export interface PoppableStack<T = any> {
     /**
      * The length of the stack.
      */
@@ -148,42 +144,38 @@ declare namespace Enumerable {
      * @return {T} The popped element.
      */
     pop: () => T;
-  }
-  /**
-   * A predicate / condition.
-   *
-   * @template T Type of the item to check.
-   *
-   * @param {T} The item to check.
-   *
-   * @return {boolean} Item satisfies the condition or not.
-   */
-  type Predicate<T = any> = (item: T) => boolean;
-  /**
-   * A selector.
-   *
-   * @template T Type of the source item.
-   * @template U Type of the new item.
-   *
-   * @param {T} item The source item.
-   *
-   * @return {U} The new item.
-   */
-  type Selector<T = any, U = any> = (item: T) => U;
-  /**
-   * Possible sequence types.
-   *
-   * @template T Type of the items.
-   */
-  type Sequence<T = any> =
-    | ArrayLike<T>
-    | Iterable<T>
-    | Iterator<T>
-    | IArguments;
-  /**
-   * A collection that can be shifted.
-   */
-  interface ShiftableStack<T = any> {
+}
+/**
+ * A predicate / condition.
+ *
+ * @template T Type of the item to check.
+ *
+ * @param {T} The item to check.
+ *
+ * @return {boolean} Item satisfies the condition or not.
+ */
+export declare type Predicate<T = any> = (item: T) => boolean;
+/**
+ * A selector.
+ *
+ * @template T Type of the source item.
+ * @template U Type of the new item.
+ *
+ * @param {T} item The source item.
+ *
+ * @return {U} The new item.
+ */
+export declare type Selector<T = any, U = any> = (item: T) => U;
+/**
+ * Possible sequence types.
+ *
+ * @template T Type of the items.
+ */
+export declare type Sequence<T = any> = Iterable<T> | ArrayLike<T> | Iterator<T> | IArguments;
+/**
+ * A collection that can be shifted.
+ */
+export interface ShiftableStack<T = any> {
     /**
      * The length of the stack.
      */
@@ -194,13 +186,13 @@ declare namespace Enumerable {
      * @return {T} The shifted element.
      */
     shift: () => T;
-  }
-  /**
-   * A stack.
-   *
-   * @template T The type of the items.
-   */
-  interface Stack<T = any> {
+}
+/**
+ * A stack.
+ *
+ * @template T The type of the items.
+ */
+export interface Stack<T = any> {
     /**
      * Pushes one or more item to the stack.
      *
@@ -209,25 +201,13 @@ declare namespace Enumerable {
      * @returns {number} The new length of the stack.
      */
     push(...items: Array<T>): number;
-  }
-  /**
-   * Indicates that something is empty.
-   */
-  const IS_EMPTY: unique symbol;
-  /**
-   * Indicates that something is an enumerable (sequence).
-   */
-  const IS_ENUMERABLE: unique symbol;
-  /**
-   * Indicates if something was not found.
-   */
-  const NOT_FOUND: unique symbol;
-  /**
-   * A sequence.
-   *
-   * @template T Type of the items.
-   */
-  interface IEnumerable<T = any> extends Iterable<T>, Iterator<T> {
+}
+/**
+ * A sequence.
+ *
+ * @template T Type of the items.
+ */
+export interface IEnumerable<T = any> extends Iterable<T>, Iterator<T> {
     /**
      * Handles current items as numbers and returns their absolute values.
      *
@@ -252,11 +232,7 @@ declare namespace Enumerable {
      *
      * @returns {TResult} The final value.
      */
-    aggregate<TAccumulate = T, TResult = T>(
-      func: (accumulator: TAccumulate, item: T) => TAccumulate,
-      seed?: TAccumulate,
-      resultSelector?: (accumulator: TAccumulate) => TResult,
-    ): TResult;
+    aggregate<TAccumulate = T, TResult = T>(func: (accumulator: TAccumulate, item: T) => TAccumulate, seed?: TAccumulate, resultSelector?: (accumulator: TAccumulate) => TResult): TResult;
     /**
      * Checks if all elements of that sequence
      * satisfy a condition or not.
@@ -422,10 +398,7 @@ declare namespace Enumerable {
      *
      * @returns {IEnumerable<IEnumerable<U>>} The sequence of sequences.
      */
-    clone<U = T>(
-      count?: number,
-      itemSelector?: Selector<T, U>,
-    ): IEnumerable<IEnumerable<U>>;
+    clone<U = T>(count?: number, itemSelector?: Selector<T, U>): IEnumerable<IEnumerable<U>>;
     /**
      * Concats the items of that sequences with other ones
      * to a new sequence.
@@ -533,10 +506,7 @@ declare namespace Enumerable {
      *
      * @returns {IEnumerable<T>} The new sequence.
      */
-    distinctBy<U>(
-      selector: Selector<T, U>,
-      comparer?: EqualityComparer<U> | true,
-    ): IEnumerable<T>;
+    distinctBy<U>(selector: Selector<T, U>, comparer?: EqualityComparer<U> | true): IEnumerable<T>;
     /**
      * Alias for forEach()
      */
@@ -576,10 +546,7 @@ declare namespace Enumerable {
      *
      * @return {IEnumerable<T>} The new sequence.
      */
-    except(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
+    except(second: Sequence<T>, comparer?: EqualityComparer<T> | true): IEnumerable<T>;
     /**
      * Handles current items as numbers and calculates e (the base of natural logarithms) raised to each value.
      *
@@ -610,10 +577,7 @@ declare namespace Enumerable {
      *
      * @returns {T|U} The item or the default value.
      */
-    firstOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
+    firstOrDefault<U = symbol>(predicateOrDefaultValue?: Predicate<T> | T, defaultValue?: U): T | U;
     /**
      * Returns a flattened sequence that contains the concatenation of all the nested sequences elements.
      *
@@ -655,10 +619,7 @@ declare namespace Enumerable {
      *
      * @returns {IEnumerable<IGrouping<TKey, T>>} The grouped items.
      */
-    groupBy<TKey>(
-      keySelector: Selector<T, TKey>,
-      keyEqualityComparer?: EqualityComparer<TKey>,
-    ): IEnumerable<IGrouping<TKey, T>>;
+    groupBy<TKey>(keySelector: Selector<T, TKey>, keyEqualityComparer?: EqualityComparer<TKey>): IEnumerable<IGrouping<TKey, T>>;
     /**
      * Correlates the elements of that sequence and another based on matching keys and groups them.
      *
@@ -671,18 +632,7 @@ declare namespace Enumerable {
      *
      * @return {IEnumerable<TResult>} The new sequence.
      */
-    groupJoin<
-      TInner = T,
-      TOuterKey = any,
-      TInnerKey = any,
-      TResult = JoinedItems<T, IEnumerable<TInner>>,
-    >(
-      inner: Sequence<TInner>,
-      outerKeySelector?: Selector<T, TOuterKey>,
-      innerKeySelector?: Selector<TInner, TInnerKey>,
-      resultSelector?: (outer: T, inner: IEnumerable<TInner>) => TResult,
-      keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true,
-    ): IEnumerable<TResult>;
+    groupJoin<TInner = T, TOuterKey = any, TInnerKey = any, TResult = JoinedItems<T, IEnumerable<TInner>>>(inner: Sequence<TInner>, outerKeySelector?: Selector<T, TOuterKey>, innerKeySelector?: Selector<TInner, TInnerKey>, resultSelector?: (outer: T, inner: IEnumerable<TInner>) => TResult, keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true): IEnumerable<TResult>;
     /**
      * Gets the current zero based index.
      */
@@ -723,10 +673,7 @@ declare namespace Enumerable {
      *
      * @return {IEnumerable<T>} The new sequence.
      */
-    intersect(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
+    intersect(second: Sequence<T>, comparer?: EqualityComparer<T> | true): IEnumerable<T>;
     /**
      * Checks if that sequence is empty or not
      * by using the length() method.
@@ -746,18 +693,7 @@ declare namespace Enumerable {
      *
      * @return {IEnumerable<TResult>} The new sequence.
      */
-    join<
-      TInner = T,
-      TOuterKey = any,
-      TInnerKey = any,
-      TResult = JoinedItems<T, TInner>,
-    >(
-      inner: Sequence<TInner>,
-      outerKeySelector?: Selector<T, TOuterKey>,
-      innerKeySelector?: Selector<TInner, TInnerKey>,
-      resultSelector?: (outer: T, inner: TInner) => TResult,
-      keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true,
-    ): IEnumerable<TResult>;
+    join<TInner = T, TOuterKey = any, TInnerKey = any, TResult = JoinedItems<T, TInner>>(inner: Sequence<TInner>, outerKeySelector?: Selector<T, TOuterKey>, innerKeySelector?: Selector<TInner, TInnerKey>, resultSelector?: (outer: T, inner: TInner) => TResult, keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true): IEnumerable<TResult>;
     /**
      * Joins the items of that sequence to one string.
      *
@@ -799,10 +735,7 @@ declare namespace Enumerable {
      *
      * @returns {T|U} The item or the default value.
      */
-    lastOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
+    lastOrDefault<U = symbol>(predicateOrDefaultValue?: Predicate<T> | T, defaultValue?: U): T | U;
     /**
      * Returns the length of the underlying collection.
      * If the underlying object does NOT contain a 'length' property, like a generator, it will
@@ -834,10 +767,7 @@ declare namespace Enumerable {
      *
      * @returns {T|symbol} The item or IS_EMPTY if that sequence is empty.
      */
-    max<U = T>(
-      valueSelector?: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): T | symbol;
+    max<U = T>(valueSelector?: Selector<T, U>, comparer?: Comparer<U>): T | symbol;
     /**
      * Returns the minimum item of that sequence.
      *
@@ -845,10 +775,7 @@ declare namespace Enumerable {
      *
      * @returns {T|symbol} The item or IS_EMPTY if that sequence is empty.
      */
-    min<U = T>(
-      valueSelector?: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): T | symbol;
+    min<U = T>(valueSelector?: Selector<T, U>, comparer?: Comparer<U>): T | symbol;
     /**
      * Removes all values that are no valid numbers.
      *
@@ -898,10 +825,7 @@ declare namespace Enumerable {
      *
      * @return {IOrderedEnumerable<T>} The new sequence.
      */
-    orderBy<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
+    orderBy<U>(selector: Selector<T, U>, comparer?: Comparer<U>): IOrderedEnumerable<T>;
     /**
      * Sorts the elements of that sequence in descending order.
      *
@@ -910,10 +834,7 @@ declare namespace Enumerable {
      *
      * @return {IOrderedEnumerable<T>} The new sequence.
      */
-    orderByDescending<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
+    orderByDescending<U>(selector: Selector<T, U>, comparer?: Comparer<U>): IOrderedEnumerable<T>;
     /**
      * Sorts the elements of that sequence in descending order by using the values as keys.
      *
@@ -956,9 +877,7 @@ declare namespace Enumerable {
      *
      * @memberof IEnumerable<T|U> The concated sequence.
      */
-    prependArray<U = T>(
-      sequences: ArrayLike<Sequence<T | U>>,
-    ): IEnumerable<T | U>;
+    prependArray<U = T>(sequences: ArrayLike<Sequence<T | U>>): IEnumerable<T | U>;
     /**
      * Calculates the product of that sequence.
      *
@@ -1042,10 +961,7 @@ declare namespace Enumerable {
      *
      * @returns {boolean} Both are equal or not.
      */
-    sequenceEqual<U>(
-      other: Sequence<U>,
-      equalityComparer?: EqualityComparer<T, U> | true,
-    ): boolean;
+    sequenceEqual<U>(other: Sequence<U>, equalityComparer?: EqualityComparer<T, U> | true): boolean;
     /**
      * Alias for rand()
      */
@@ -1082,10 +998,7 @@ declare namespace Enumerable {
      *
      * @throws Sequence contains for than one (matching) element.
      */
-    singleOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
+    singleOrDefault<U = symbol>(predicateOrDefaultValue?: Predicate<T> | T, defaultValue?: U): T | U;
     /**
      * Handles current items as numbers and calculates the hyperbolic sine for each item.
      *
@@ -1183,10 +1096,7 @@ declare namespace Enumerable {
      *
      * @returns U The lookup object
      */
-    toLookup<TKey extends PropertyKey, U = any>(
-      keySelector: Selector<T, TKey>,
-      keyEqualityComparer?: EqualityComparer<TKey>,
-    ): U;
+    toLookup<TKey extends PropertyKey, U = any>(keySelector: Selector<T, TKey>, keyEqualityComparer?: EqualityComparer<TKey>): U;
     /**
      * Wraps the items of that sequence to an object.
      *
@@ -1197,9 +1107,7 @@ declare namespace Enumerable {
      *
      * @returns TResult The new object.
      */
-    toObject<TResult = any, TKey extends PropertyKey = number>(
-      keySelector?: (item: T, index: number) => TKey,
-    ): TResult;
+    toObject<TResult = any, TKey extends PropertyKey = number>(keySelector?: (item: T, index: number) => TKey): TResult;
     /**
      * Traces the elements of that sequence.
      *
@@ -1216,10 +1124,7 @@ declare namespace Enumerable {
      *
      * @returns {IEnumerable<T>} The new sequence.
      */
-    union(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
+    union(second: Sequence<T>, comparer?: EqualityComparer<T> | true): IEnumerable<T>;
     /**
      * Filters the items of that sequence.
      *
@@ -1240,27 +1145,24 @@ declare namespace Enumerable {
      *
      * @returns {IEnumerable<TResult>} The "zipped" sequence.
      */
-    zip<U = T, TResult = any>(
-      second: Sequence<U>,
-      resultSelector: ZipSelector<T, U, TResult>,
-    ): IEnumerable<TResult>;
-  }
-  /**
-   * Describes a grouping.
-   *
-   * @template T Type of the items.
-   * @template TKey Type of the key.
-   */
-  interface IGrouping<TKey = any, T = any> extends IEnumerable<T> {
+    zip<U = T, TResult = any>(second: Sequence<U>, resultSelector: ZipSelector<T, U, TResult>): IEnumerable<TResult>;
+}
+/**
+ * Describes a grouping.
+ *
+ * @template T Type of the items.
+ * @template TKey Type of the key.
+ */
+export interface IGrouping<TKey = any, T = any> extends IEnumerable<T> {
     /**
      * Gets the key.
      */
     readonly key: TKey;
-  }
-  /**
-   * Describes an ordered sequence.
-   */
-  interface IOrderedEnumerable<T = any> extends IEnumerable<T> {
+}
+/**
+ * Describes an ordered sequence.
+ */
+export interface IOrderedEnumerable<T = any> extends IEnumerable<T> {
     /**
      * Performs a subsequent ordering of the elements in that sequence in ascending order,
      * using the values itself as keys.
@@ -1280,10 +1182,7 @@ declare namespace Enumerable {
      *
      * @return {IOrderedEnumerable<T>} The new sequence.
      */
-    thenBy<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
+    thenBy<U>(selector: Selector<T, U>, comparer?: Comparer<U>): IOrderedEnumerable<T>;
     /**
      * Performs a subsequent ordering of the elements in that sequence in descending order, according to a key.
      *
@@ -1294,10 +1193,7 @@ declare namespace Enumerable {
      *
      * @return {IOrderedEnumerable<T>} The new sequence.
      */
-    thenByDescending<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
+    thenByDescending<U>(selector: Selector<T, U>, comparer?: Comparer<U>): IOrderedEnumerable<T>;
     /**
      * Performs a subsequent ordering of the elements in that sequence in descending order,
      * using the values as keys.
@@ -1307,892 +1203,14 @@ declare namespace Enumerable {
      * @return {IOrderedEnumerable<T>} The new sequence.
      */
     thenDescending(comparer?: Comparer<T>): IOrderedEnumerable<T>;
-  }
-  /**
-   * A result selector for a 'zip' method / function.
-   *
-   * @param {T} x The "left" value.
-   * @param {U} y The "other" value.
-   * @param {number} index The zero based index.
-   *
-   * @return {TResult} The "zipped" result,
-   */
-  type ZipSelector<T = any, U = T, TResult = any> = (
-    x: T,
-    y: U,
-    index: number,
-  ) => TResult;
-  /**
-   * Represents a list of errors.
-   */
-  class AggregateError extends Error {
-    /**
-     * Stores the errors.
-     */
-    protected _errors: any[];
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {any[]} [errors] The occurred errors.
-     */
-    constructor(errors?: any[]);
-    /**
-     * Gets the errors.
-     */
-    get errors(): any[];
-    /** @inheritdoc */
-    get stack(): string;
-    /** @inheritdoc */
-    toString(): string;
-  }
-  /**
-   * A error wrapper for a function.
-   */
-  class FunctionError extends Error {
-    /**
-     * Stores the inner error.
-     */
-    protected _error: any;
-    /**
-     * Stores the underlying function.
-     */
-    protected _function: Function;
-    /**
-     * Stores the (zero based) index.
-     */
-    protected _index: number;
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {any} [err] The underlying, inner error.
-     * @param {Function} [func] The underlying function.
-     * @param {number} [index] The (zero based) index.
-     */
-    constructor(err?: any, func?: Function, index?: number);
-    /**
-     * Gets the (zero based) index.
-     */
-    get index(): number;
-    /**
-     * Gets the inner error.
-     */
-    get innerError(): any;
-    /** @inheritdoc */
-    get stack(): string;
-    /** @inheritdoc */
-    toString(): string;
-  }
-  /**
-   * A basic sequence.
-   */
-  abstract class EnumerableBase<T = any> implements IEnumerable<T> {
-    /**
-     * Stores the current iterator result.
-     */
-    protected _current: IteratorResult<T>;
-    /**
-     * Stores the current index.
-     */
-    protected _index: number;
-    /**
-     * Indicates that that instance is an enumerable (sequence).
-     */
-    readonly IS_ENUMERABLE: symbol;
-    /** @inheritdoc */
-    [Symbol.iterator](): Iterator<T>;
-    /** @inheritdoc */
-    abs(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    aggregate<TAccumulate = T, TResult = T>(
-      func: (accumulator: TAccumulate, item: T) => TAccumulate,
-      seed?: TAccumulate,
-      resultSelector?: (accumulator: TAccumulate) => TResult,
-    ): TResult;
-    /** @inheritdoc */
-    all(predicate: Predicate<T>): boolean;
-    /** @inheritdoc */
-    any(predicate?: Predicate<T>): boolean;
-    /** @inheritdoc */
-    append<U = T>(...args: Sequence<U>[]): IEnumerable<T | U>;
-    /** @inheritdoc */
-    appendArray<U = T>(sequences: ArrayLike<Sequence<U>>): IEnumerable<T | U>;
-    /** @inheritdoc */
-    arcCos(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    arcCosH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    arcSin(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    arcSinH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    arcTan(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    arcTanH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    assert(predicate: Predicate<T>, errMsg?: ItemMessage<T>): this;
-    /** @inheritdoc */
-    assertAll(predicate: Predicate<T>, errMsg?: ItemMessage<T>): this;
-    /** @inheritdoc */
-    async(action: AsyncAction<T>, previousValue?: any): Promise<any>;
-    /** @inheritdoc */
-    average(selector?: Selector<T, number>): number | symbol;
-    /** @inheritdoc */
-    get canReset(): boolean;
-    /** @inheritdoc */
-    cast<U>(type?: string): IEnumerable<U>;
-    /** @inheritdoc */
-    ceil(): IEnumerable<number>;
-    /** @inheritdoc */
-    chunk(size?: number): IEnumerable<IEnumerable<T>>;
-    /**
-     * @see chunk()
-     */
-    protected chunkInner(
-      size: number,
-    ): Generator<IEnumerable<T>, void, unknown>;
-    /** @inheritdoc */
-    clone<U = T>(
-      count?: number,
-      itemSelector?: Selector<T, U>,
-    ): IEnumerable<IEnumerable<U>>;
-    /**
-     * @see concatArray()
-     */
-    protected cloneInner<U>(
-      count: number,
-      itemSelector: Selector<T, U>,
-    ): Generator<any, void, unknown>;
-    /** @inheritdoc */
-    concat<U = T>(...args: Sequence<U>[]): IEnumerable<T | U>;
-    /** @inheritdoc */
-    concatArray<U = T>(sequences: ArrayLike<Sequence<U>>): IEnumerable<T | U>;
-    /**
-     * @see concatArray()
-     */
-    protected concatArrayInner<U>(
-      sequences: ArrayLike<Sequence<U>>,
-    ): IterableIterator<T | U>;
-    /** @inheritdoc */
-    consume(): this;
-    /** @inheritdoc */
-    contains<U>(item: U, comparer?: EqualityComparer<T, U> | true): boolean;
-    /** @inheritdoc */
-    cos(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    cosH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    count(predicate?: Predicate<T>): number;
-    /** @inheritdoc */
-    get current(): IteratorResult<T>;
-    /** @inheritdoc */
-    defaultArrayIfEmpty(defaultSequence: Sequence<T>): IEnumerable<T>;
-    /** @inheritdoc */
-    defaultIfEmpty(...defaultItems: Array<T>): IEnumerable<T>;
-    /**
-     * @see defaultIfEmpty()
-     */
-    protected defaultIfEmptyInner(
-      defaultItems: Array<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    defaultSequenceIfEmpty(defaultSequence: Sequence<T>): IEnumerable<T>;
-    /**
-     * @see defaultIfEmpty()
-     */
-    protected defaultSequenceIfEmptyInner(
-      defaultSequence: Sequence<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    distinct(comparer?: EqualityComparer<T> | true): IEnumerable<T>;
-    /** @inheritdoc */
-    distinctBy<U>(
-      selector: Selector<T, U>,
-      comparer?: EqualityComparer<U> | true,
-    ): IEnumerable<T>;
-    /**
-     * @see distinct()
-     */
-    protected distinctByInner<U>(
-      selector: Selector<T, U>,
-      comparer: EqualityComparer<U>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    each(action: EachAction<T>): this;
-    /** @inheritdoc */
-    eachAll(action: EachAction<T>): this;
-    /** @inheritdoc */
-    elementAt(index: number): T;
-    /** @inheritdoc */
-    elementAtOrDefault<U = symbol>(index: number, defaultValue?: U): T | U;
-    /** @inheritdoc */
-    except(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
-    /**
-     * @see except()
-     */
-    protected exceptInner(
-      second: Array<T>,
-      comparer: EqualityComparer<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    exp(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    first(predicate?: Predicate<T>): T;
-    /** @inheritdoc */
-    firstOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
-    /** @inheritdoc */
-    flatten<U = T>(): IEnumerable<U>;
-    /** @inheritdoc */
-    floor(): IEnumerable<number>;
-    /** @inheritdoc */
-    forAll(action: EachAction<T>): this;
-    /** @inheritdoc */
-    forEach(action: EachAction<T>): this;
-    /**
-     * @see chunkInner()
-     */
-    protected getNextChunkArray(size: number): T[];
-    /** @inheritdoc */
-    groupBy<TKey>(
-      keySelector: Selector<T, TKey>,
-      keyEqualityComparer?: EqualityComparer<TKey>,
-    ): IEnumerable<IGrouping<TKey, T>>;
-    /**
-     * @see groupBy()
-     */
-    protected groupByInner<TKey>(
-      keySelector: Selector<T, TKey>,
-      keyEqualityComparer: EqualityComparer<TKey>,
-    ): Generator<Grouping<TKey, T>, void, unknown>;
-    /** @inheritdoc */
-    groupJoin<
-      TInner = T,
-      TOuterKey = any,
-      TInnerKey = any,
-      TResult = JoinedItems<T, IEnumerable<TInner>>,
-    >(
-      inner: Sequence<TInner>,
-      outerKeySelector?: Selector<T, TOuterKey>,
-      innerKeySelector?: Selector<TInner, TInnerKey>,
-      resultSelector?: (outer: T, inner: IEnumerable<TInner>) => TResult,
-      keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true,
-    ): IEnumerable<TResult>;
-    /**
-     * @see groupJoin()
-     */
-    protected groupJoinInner<TInner, TOuterKey, TInnerKey, TResult>(
-      inner: IEnumerable<TInner>,
-      outerKeySelector: Selector<T, TOuterKey>,
-      innerKeySelector: Selector<TInner, TInnerKey>,
-      resultSelector: (outer: T, inner: IEnumerable<TInner>) => TResult,
-      keyEqualityComparer: EqualityComparer<TOuterKey, TInnerKey>,
-    ): Generator<TResult, void, unknown>;
-    /** @inheritdoc */
-    get index(): number;
-    /** @inheritdoc */
-    indexOf<U>(item: U, comparer?: EqualityComparer<T, U> | true): number;
-    /** @inheritdoc */
-    intersperse<U = T>(...separators: U[]): IEnumerable<T | U>;
-    /**
-     * @see intersperseInner()
-     */
-    protected intersperseInner<U>(separators: U[]): Iterator<T | U>;
-    /** @inheritdoc */
-    intersperseArray<U = T>(separators: Sequence<U>): IEnumerable<T | U>;
-    /** @inheritdoc */
-    intersect(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
-    /**
-     * @see intersect()
-     */
-    protected intersectInner(
-      second: Array<T>,
-      comparer: EqualityComparer<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    isEmpty(): boolean;
-    /** @inheritdoc */
-    join<
-      TInner = T,
-      TOuterKey = any,
-      TInnerKey = any,
-      TResult = JoinedItems<T, TInner>,
-    >(
-      inner: Sequence<TInner>,
-      outerKeySelector?: Selector<T, TOuterKey>,
-      innerKeySelector?: Selector<TInner, TInnerKey>,
-      resultSelector?: (outer: T, inner: TInner) => TResult,
-      keyEqualityComparer?: EqualityComparer<TOuterKey, TInnerKey> | true,
-    ): IEnumerable<TResult>;
-    /**
-     * @see join()
-     */
-    protected joinInner<TInner, TOuterKey, TInnerKey, TResult>(
-      inner: IEnumerable<TInner>,
-      outerKeySelector: Selector<T, TOuterKey>,
-      innerKeySelector: Selector<TInner, TInnerKey>,
-      resultSelector: (outer: T, inner: TInner) => TResult,
-      keyEqualityComparer: EqualityComparer<TOuterKey, TInnerKey>,
-    ): Generator<TResult, void, unknown>;
-    /** @inheritdoc */
-    joinToString(separator?: any): string;
-    /** @inheritdoc */
-    last(predicate?: Predicate<T>): T;
-    /** @inheritdoc */
-    lastIndexOf<U>(item: U, comparer?: EqualityComparer<T, U> | true): number;
-    /** @inheritdoc */
-    lastOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
-    /** @inheritdoc */
-    length(): number;
-    /** @inheritdoc */
-    log(base?: number, handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    makeResettable(): IEnumerable<T>;
-    /** @inheritdoc */
-    max<U = T>(
-      valueSelector?: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): T | symbol;
-    /** @inheritdoc */
-    min<U = T>(
-      valueSelector?: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): T | symbol;
-    /** @inheritdoc */
-    abstract next(value?: any): IteratorResult<T>;
-    /** @inheritdoc */
-    noNAN(checkForInt?: boolean): IEnumerable<T>;
-    /** @inheritdoc */
-    not(predicate?: Predicate<T>): IEnumerable<T>;
-    /** @inheritdoc */
-    notEmpty(): IEnumerable<T>;
-    /** @inheritdoc */
-    ofType<U = any>(type: string): IEnumerable<U>;
-    /** @inheritdoc */
-    order(comparer?: Comparer<T>): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    orderBy<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    orderByDescending<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U>,
-    ): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    orderDescending(comparer?: Comparer<T>): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    pipe(action: EachAction<T>): IEnumerable<T>;
-    /**
-     * @see pipe()
-     */
-    protected pipeInner(action: EachAction<T>): Iterator<T>;
-    /** @inheritdoc */
-    pow(exponent?: number, handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    prepend<U = T>(...args: Sequence<U>[]): IEnumerable<T | U>;
-    /** @inheritdoc */
-    prependArray<U = T>(sequences: ArrayLike<Sequence<U>>): IEnumerable<T | U>;
-    /**
-     * @see concatArray()
-     */
-    protected prependArrayInner<U>(
-      sequences: ArrayLike<Sequence<U>>,
-    ): IterableIterator<T | U>;
-    /** @inheritdoc */
-    product(): T | symbol;
-    /** @inheritdoc */
-    pushTo(stack: Stack<T>): this;
-    /** @inheritdoc */
-    rand(sortValueProvider?: () => any): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    reset(): this;
-    /** @inheritdoc */
-    reverse(): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    root(power?: number, handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    round(): IEnumerable<number>;
-    /** @inheritdoc */
-    select<U>(selector: Selector<T, U>): IEnumerable<U>;
-    /** @inheritdoc */
-    selectMany<U>(selector: Selector<T, Sequence<U>>): IEnumerable<U>;
-    /**
-     * @see selectMany()
-     */
-    protected selectManyInner<U>(
-      selector: Selector<T, Sequence<U>>,
-    ): IterableIterator<U>;
-    /** @inheritdoc */
-    sequenceEqual<U>(
-      other: Sequence<U>,
-      equalityComparer?: EqualityComparer<T, U> | true,
-    ): boolean;
-    /** @inheritdoc */
-    shuffle(sortValueProvider?: () => any): any;
-    /** @inheritdoc */
-    sin(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    single(predicate?: Predicate<T>): T;
-    /** @inheritdoc */
-    singleOrDefault<U = symbol>(
-      predicateOrDefaultValue?: Predicate<T> | T,
-      defaultValue?: U,
-    ): T | U;
-    /** @inheritdoc */
-    sinH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    skip(count?: number): IEnumerable<T>;
-    /** @inheritdoc */
-    skipLast(): IEnumerable<T>;
-    /**
-     * @see skipLast()
-     */
-    protected skipLastInner(): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    skipWhile(predicate: Predicate<T>): IEnumerable<T>;
-    /**
-     * @see takeWhile()
-     */
-    protected skipWhileInner(
-      predicate: Predicate<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    sqrt(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    sum(): T | symbol;
-    /** @inheritdoc */
-    take(count?: number): IEnumerable<T>;
-    /** @inheritdoc */
-    takeWhile(predicate: Predicate<T>): IEnumerable<T>;
-    /**
-     * @see takeWhile()
-     */
-    protected takeWhileInner(
-      predicate: Predicate<T>,
-    ): Generator<T, void, unknown>;
-    /** @inheritdoc */
-    tan(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    tanH(handleAsInt?: boolean): IEnumerable<number>;
-    /** @inheritdoc */
-    toArray(): Array<T>;
-    /** @inheritdoc */
-    toLookup<TKey extends PropertyKey, U = any>(
-      keySelector: Selector<T, TKey>,
-      keyEqualityComparer?: EqualityComparer<TKey>,
-    ): U;
-    /** @inheritdoc */
-    toObject<TResult = any, TKey extends PropertyKey = number>(
-      keySelector?: (item: T, index: number) => TKey,
-    ): TResult;
-    /** @inheritdoc */
-    trace(formatter?: Selector<T, any>): IEnumerable<T>;
-    /** @inheritdoc */
-    union(
-      second: Sequence<T>,
-      comparer?: EqualityComparer<T> | true,
-    ): IEnumerable<T>;
-    /** @inheritdoc */
-    where(predicate: Predicate<T>): IEnumerable<T>;
-    /**
-     * @see where()
-     */
-    protected whereInner(predicate: Predicate<T>): IterableIterator<T>;
-    /** @inheritdoc */
-    zip<U = T, TResult = any>(
-      second: Sequence<U>,
-      resultSelector: ZipSelector<T, U, TResult>,
-    ): IEnumerable<TResult>;
-    /**
-     * @see zip()
-     */
-    protected zipInner<U, TResult>(
-      second: Iterator<U>,
-      resultSelector: ZipSelector<T, U, TResult>,
-    ): Generator<TResult, void, unknown>;
-  }
-  /**
-   * Wraps a sequence.
-   *
-   * @template T Type of the items.
-   */
-  class EnumerableWrapper<T = any> extends EnumerableBase<T> {
-    /**
-     * The wrapped sequence.
-     */
-    protected _sequence: IEnumerable<T>;
-    /**
-     * Intializes a new instance of that class.
-     *
-     * @param {IEnumerable<T>} [seq] The sequence to wrap.
-     */
-    constructor(seq?: IEnumerable<T>);
-    /** @inheritdoc */
-    get canReset(): boolean;
-    /** @inheritdoc */
-    get current(): IteratorResult<T, any>;
-    /** @inheritdoc */
-    next(): IteratorResult<T, any>;
-    /** @inheritdoc */
-    reset(): this;
-  }
-  /**
-   * A sequence based on an Iterator<T>.
-   */
-  class IteratorEnumerable<T = any> extends EnumerableBase<T> {
-    /**
-     * Stores the inner iterator.
-     */
-    protected _iterator: Iterator<T>;
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {Iterator<T>} [iterator] The underlying iterator.
-     */
-    constructor(iterator?: Iterator<T>);
-    /** @inheritdoc */
-    next(value?: any): IteratorResult<T>;
-  }
-  /**
-   * A sequence based on an array.
-   */
-  class ArrayEnumerable<T = any> extends EnumerableBase<T> {
-    /**
-     * Stores the underlying array.
-     */
-    protected _array: ArrayLike<T>;
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {ArrayLike<T>} [arr] The underlying array.
-     */
-    constructor(arr?: ArrayLike<T>);
-    /** @inheritdoc */
-    get canReset(): boolean;
-    /** @inheritdoc */
-    length(): number;
-    /** @inheritdoc */
-    next(): IteratorResult<T>;
-    /** @inheritdoc */
-    reset(): this;
-  }
-  /**
-   * A grouping.
-   *
-   * @template T Type of the items.
-   * @template TKey Type of the key.
-   */
-  class Grouping<TKey = any, T = any>
-    extends EnumerableWrapper<T>
-    implements IGrouping<TKey, T>
-  {
-    /**
-     * Stores the key.
-     */
-    protected _key: TKey;
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {TKey} key The key.
-     * @param {IEnumerable} seq The items of the grouping.
-     */
-    constructor(key: TKey, seq: IEnumerable<T>);
-    /** @inheritdoc */
-    get key(): TKey;
-  }
-  /**
-   * An ordered sequence.
-   *
-   * @template T Type of the items.
-   * @template U Type of the sort keys.
-   */
-  class OrderedEnumerable<T = any, U = T>
-    extends EnumerableWrapper<T>
-    implements IOrderedEnumerable<T>
-  {
-    /**
-     * Stores the items in the original order.
-     */
-    protected _originalItems: Array<T>;
-    /**
-     * Stores the comparer for the sort keys.
-     */
-    protected _orderComparer: Comparer<U, U>;
-    /**
-     * Stores the selector for the keys.
-     */
-    protected _orderSelector: Selector<T, U>;
-    /**
-     * Initializes a new instance of that class.
-     *
-     * @param {IEnumerable<T>} seq The source sequence.
-     * @param {Selector<T,U>} selector The selector for the sort values.
-     * @param {Comparer<U,U>} comparer The comparer to use.
-     */
-    constructor(
-      seq: IEnumerable<T>,
-      selector: Selector<T, U>,
-      comparer: Comparer<U, U>,
-    );
-    /**
-     * Gets the comparer.
-     */
-    get comparer(): Comparer<U, U>;
-    /**
-     * Gets the selector.
-     */
-    get selector(): (x: T) => any;
-    /** @inheritdoc */
-    then(comparer?: Comparer<T>): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    thenBy<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U, U>,
-    ): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    thenByDescending<U>(
-      selector: Selector<T, U>,
-      comparer?: Comparer<U, U>,
-    ): IOrderedEnumerable<T>;
-    /** @inheritdoc */
-    thenDescending(comparer?: Comparer<T>): IOrderedEnumerable<T>;
-  }
-  /**
-   * Keeps sure that a value is a sequence.
-   *
-   * @param {any} val The value to cast (if needed).
-   *
-   * @return {IEnumerable<T>} The value as sequence. Can return (null) or (undefined), if 'val' is one of these values.
-   */
-  function asEnumerable<T = any>(val: any): IEnumerable<T>;
-  /**
-   * Returns a value as function.
-   *
-   * @param {any} val The function or a value that can be converted to a lambda expression string.
-   * @param {boolean} throwException Throw an exception on parse errors or return (false).
-   *
-   * @return {T} 'val' as function or (false) on error, if 'throwException' is (false).
-   *             Can be (null) or (undefined) if 'val' has a same value or is an empty string (representation).
-   */
-  function asFunc<T extends Function = Function>(
-    val: any,
-    throwException?: boolean,
-  ): T | false;
-  /**
-   * Builds a sequence.
-   *
-   * @template T Type of the items.
-   *
-   * @param {CancelableFactory<T>} factory The factory function.
-   * @param {number} [count] The maximum number of items.
-   *
-   * @returns {IEnumerable<T>}
-   */
-  function build<T = any>(
-    factory: CancelableFactory<T>,
-    count?: number,
-  ): IEnumerable<T>;
-  /**
-   * Builds a flatten sequence of sequences.
-   *
-   * @template T Type of the items.
-   * @param {CancelableFactory<Sequence<T>>} factory The factory.
-   * @param {number} [count] The maximum number of invocations.
-   *
-   * @returns {IEnumerable<T>} The flatten list of items.
-   */
-  function buildMany<T = any>(
-    factory: CancelableFactory<Sequence<T>>,
-    count?: number,
-  ): IEnumerable<T>;
-  /**
-   * Creates a new sequence from a list of items.
-   *
-   * @template T Type of the items.
-   *
-   * @param {...Array<T>} items The items for the sequence.
-   *
-   * @returns {IEnumerable<T>} The new sequence.
-   */
-  function create<T = any>(...items: Array<T>): IEnumerable<T>;
-  /**
-   * Creates an empty sequence.
-   *
-   * @template T The type of the sequence.
-   *
-   * @returns {IEnumerable<T>} The new, empty sequence.
-   */
-  function empty<T = any>(): IEnumerable<T>;
-  /**
-   * Creates a new sequence.
-   *
-   * @param {Sequence<T>} seq The input data.
-   *
-   * @return {IEnumerable<T>} The new sequence.
-   */
-  function from<T = any>(seq?: Sequence<T>): IEnumerable<T>;
-  /**
-   * Creates a new sequence from the string representation of a value.
-   *
-   * @param {any} val The value.
-   *
-   * @return {IEnumerable<string>} The new sequence.
-   */
-  function fromString(val: any): IEnumerable<string>;
-  /**
-   * Checks if a value represents the IS_EMPTY symbol.
-   *
-   * @param {any} val The value to check.
-   *
-   * @returns {boolean} Is IS_EMPTY symbol or not.
-   */
-  function isEmpty(val: any): val is symbol;
-  /**
-   * Checks if a value represents an enumerable (sequence).
-   *
-   * @param {any} val The value to check.
-   *
-   * @returns {boolean} Is enumerable (sequence) or not.
-   */
-  function isEnumerable<T = any>(val: any): val is IEnumerable<T>;
-  /**
-   * Checks if a sequence is (null) or empty.
-   *
-   * @param {IEnumerable<T>} seq The sequence to check.
-   *
-   * @return {boolean} Is (null) or empty.
-   */
-  function isNullOrEmpty<T = any>(
-    seq: IEnumerable<T> | null,
-  ): seq is null | IEnumerable<T>;
-  /**
-   * Checks if a value can be used as enumerable (sequence).
-   *
-   * @param {any} val The value to check.
-   *
-   * @return {boolean} Is sequence or not.
-   */
-  function isSequence<T = any>(val: any): val is Sequence<T>;
-  /**
-   * Checks if a sequence is (undefined) / (null) or empty.
-   *
-   * @param {IEnumerable<T>} seq The sequence to check.
-   *
-   * @return {boolean} Is (undefined), (null) or empty.
-   */
-  function isUndefinedNullOrEmpty<T = any>(
-    seq: IEnumerable<T> | null | undefined,
-  ): seq is undefined | null | IEnumerable<T>;
-  /**
-   * Checks if a sequence is (undefined) or empty.
-   *
-   * @param {IEnumerable<T>} seq The sequence to check.
-   *
-   * @return {boolean} Is (undefined) or empty.
-   */
-  function isUndefinedOrEmpty<T = any>(
-    seq: IEnumerable<T> | undefined,
-  ): seq is undefined | IEnumerable<T>;
-  /**
-   * Checks if a value represents the NOT_FOUND symbol.
-   *
-   * @param {any} val The value to check.
-   *
-   * @returns {boolean} Is NOT_FOUND symbol or not.
-   */
-  function notFound(val: any): val is symbol;
-  /**
-   * Creates a sequence from a stack by popping its elements.
-   *
-   * @param {PoppableStack<T>} stack The stack from where to pop.
-   *
-   * @return {IEnumerable<T>} The new sequence.
-   */
-  function popFrom<T = any>(stack: PoppableStack<T>): IEnumerable<T>;
-  /**
-   * Returns a sequence of random numbers.
-   *
-   * @param {number} [count] The maximum number of items.
-   *                         If not defined, the sequence will become infinitely.
-   * @param {(randomValue: number, index: number) => number} [valueProvider] A custom function for providing a random number.
-   *
-   * @return {IEnumerable<number>} The sequence of random numbers.
-   */
-  function random(
-    count?: number,
-    valueProvider?: (randomValue: number, index: number) => number,
-  ): IEnumerable<number>;
-  /**
-   * Creates a range of numbers.
-   *
-   * @param {number} start The start value.
-   * @param {number} [count] The meximum number of values.
-   *
-   * @returns {IEnumerable<number>} The new sequence.
-   */
-  function range(start: number, count?: number): IEnumerable<number>;
-  /**
-   * Creates a range of numbers.
-   *
-   * @param {T} item The item to repeat.
-   * @param {number} [count] The maximum number of items.
-   *
-   * @returns {IEnumerable<number>} The new sequence.
-   */
-  function repeat<T = any>(item: T, count?: number): IEnumerable<T>;
-  /**
-   * Creates a sequence from a stack by shifting its elements.
-   *
-   * @param {PoppableStack<T>} stack The stack from where to shift.
-   *
-   * @return {IEnumerable<T>} The new sequence.
-   */
-  function shiftFrom<T = any>(stack: ShiftableStack<T>): IEnumerable<T>;
-  /**
-   * Returns a sorted sequence.
-   *
-   * @template T Type of the items.
-   * @template U Type of the keys.
-   *
-   * @param {Sequence<T>} items The items to sort.
-   * @param {Selector<T,U>} [selector] The selector for the keys.
-   * @param {Comparer<U>} [comparer] The custom comparer for the keys.
-   *
-   * @return {IOrderedEnumerable<T>} The sorted sequence.
-   */
-  function sort<T = any, U = T>(
-    items: Sequence<T>,
-    selector?: Selector<T, U>,
-    comparer?: Comparer<U>,
-  ): IOrderedEnumerable<T>;
-  /**
-   * Returns a sorted sequence (descending).
-   *
-   * @template T Type of the items.
-   * @template U Type of the keys.
-   *
-   * @param {Sequence<T>} items The items to sort.
-   * @param {Selector<T,U>} [selector] The selector for the keys.
-   * @param {Comparer<U>} [comparer] The custom comparer for the keys.
-   *
-   * @return {IOrderedEnumerable<T>} The sorted sequence.
-   */
-  function sortDesc<T = any, U = T>(
-    items: Sequence<T>,
-    selector?: Selector<T, U>,
-    comparer?: Comparer<U>,
-  ): IOrderedEnumerable<T>;
 }
-export = Enumerable;
+/**
+ * A result selector for a 'zip' method / function.
+ *
+ * @param {T} x The "left" value.
+ * @param {U} y The "other" value.
+ * @param {number} index The zero based index.
+ *
+ * @return {TResult} The "zipped" result,
+ */
+export declare type ZipSelector<T = any, U = T, TResult = any> = (x: T, y: U, index: number) => TResult;
