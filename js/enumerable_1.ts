@@ -156,7 +156,7 @@ Enumerable.FunctionError = FunctionError;
 /**
  * A basic sequence.
  */
-abstract class EnumerableBase<T> /*implements IEnumerable<T>*/ {
+abstract class EnumerableBase<T> implements IEnumerable<T> {
   /**
    * Stores the current iterator result.
    */
